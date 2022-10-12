@@ -75,14 +75,16 @@ class userlogin(Resource):
         if user and UserModel.check_password(username,password):
             if user.activated:
                 access_token = create_access_token(identity=user.id,fresh=True)
-                refresh_token = create_refresh_token(user.id)
-
                 return {
                     "access_token": access_token,
-                    "refresh_token": refresh_token
                 },200
             return {"msg": "User has not yet been activated"},401
-        
+            else :
+                refresh_token = create_refresh_token(user.id)
+                return {
+                    "refresh_token": refresh_token
+                },200
+
         return {"msg": "wrong creds"},401
     
 class logoutuser(Resource):
