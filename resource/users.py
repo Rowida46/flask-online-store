@@ -52,7 +52,7 @@ class usermethods(Resource):
         return user_schema.dump(user),200
     
     @classmethod
-    def get(cls,user_id):
+    def delete(cls,user_id):
         user = UserModel.find_by_id(user_id)
         if not user:
             return {"msg": "User not found"},404
